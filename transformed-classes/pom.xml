@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>nl.topicus.javassist-demo</groupId>
+		<artifactId>javassist-demo-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>transformed-classes</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>nl.topicus.javassist-demo</groupId>
+			<artifactId>base-classes</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>nl.topicus.plugins</groupId>
+				<artifactId>javassist-maven-plugin</artifactId>
+				<version>1.1-SNAPSHOT</version>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.sonatype.plexus</groupId>
+						<artifactId>plexus-build-api</artifactId>
+						<version>0.0.7</version>
+					</dependency>
+					<dependency>
+						<groupId>nl.topicus.javassist-demo</groupId>
+						<artifactId>transformer</artifactId>
+						<version>1.0-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+
+				<configuration>
+					<transformerClasses>
+						<transformerClass>
+							<className>nl.topicus.DemoTransformer</className>
+							<properties>
+								<property>
+									<name>filterPackageName</name>
+									<value>nl.topicus</value>
+								</property>
+							</properties>
+						</transformerClass>
+					</transformerClasses>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>javassist</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>nl.topicus.plugins</groupId>
+										<artifactId>javassist-maven-plugin</artifactId>
+										<versionRange>[1.1-SNAPSHOT,)</versionRange>
+										<goals>
+											<goal>javassist</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute>
+											<runOnIncremental>true</runOnIncremental>
+										</execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
