@@ -17,8 +17,7 @@
 			<groupId>nl.topicus.javassist-demo</groupId>
 			<artifactId>base-classes</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<scope>compile</scope>
-			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -65,35 +64,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>nl.topicus.plugins</groupId>
-										<artifactId>javassist-maven-plugin</artifactId>
-										<versionRange>[1.1-SNAPSHOT,)</versionRange>
-										<goals>
-											<goal>javassist</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute>
-											<runOnIncremental>true</runOnIncremental>
-										</execute>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 </project>
